@@ -10,8 +10,8 @@ A Sinatra based webapp for watching (like a TV) and managing (like a DVR) your f
 This application is an extraction of part of an exising rails application I wrote for myself in my 
 spare time to help me manage the shows I like to watch.
 
-Q. Why not just make an adapter/plugin/whatever for something like XBMC?
-A. Because this just seemed easier to me.
+##### Q. Why not just make an adapter/plugin/whatever for something like XBMC?
+##### A. Because this just seemed easier to me.
 
 
 ## Documentation
