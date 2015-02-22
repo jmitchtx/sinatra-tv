@@ -1,0 +1,4 @@
+Gemfile.lock
+config/mongoid.yml
+public/covers
+config/tvr.yml

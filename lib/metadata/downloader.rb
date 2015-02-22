@@ -1,0 +1,4 @@
+class Downloader
+  
+  
+end

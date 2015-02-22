@@ -1,0 +1,2 @@
+binaries_adapter: MyCustomNetworkAdapter
+mongoid_config: /path/to/my/mongoid.yml

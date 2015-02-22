@@ -1,0 +1,84 @@
+.show{:class => row, id: show.slug, :name => show.name_on_disk.upcase}
+  .show_info
+    %a{:name => show.name_on_disk}
+    %a{:name => show.name_on_disk[0].upcase}
+    %span.right.click_and_refresh_show.delete
+      %a{:href => "/destroy/#{show.id}"}
+        x
+      &nbsp;
+    %span.right.click_and_refresh_show
+      %a{:href => "/refresh_rage/#{show.id}"}
+        refresh
+      &nbsp;
+    
+    %span.bold
+      = show.name_on_disk
+      (
+      - m = show.runtime
+      = "#{m} minutes," if m
+      = show.airday.try(:pluralize) || "TBD"
+      @
+      - t = show.airtime
+      = Time.parse(t).strftime("%l%p") if t
+      on
+      = show.network
+      )
+    = show.errors.full_messages if show.errors.present?
+    %span.left
+      = "[#{show.started} - #{show.ended}]" if show.started
+      %span.click_and_refresh_show
+        Last updated: 
+        %a{:href => "/refresh/#{show.id}/row_color/#{row}"}
+          = show.last_updated_ago || 'Missing'
+      
+    
+    .genres.clear
+      %span.bold
+        Genres:
+      %span.genres
+        |
+        - show.genres.each do |genre|
+          = genre
+          |
+      %hr.clear
+      .seasons
+        - show.seasons.each do |season|
+          - raise show.seasons.inspect unless season
+          - s = season["no"].rjust(2, '0')
+          .season
+            %a{:href => "http://nzbclub.com/search.aspx?q=#{show.name_on_disk}+720+s#{s}", :target => "nzbclub"}
+              %img{:src => "/images/nzb_club.jpg"}
+            %a{:href => "http://www.nzbindex.nl/search/?q=#{show.name_on_disk}+720+s#{s}&age=&max=250&sort=agedesc&minsize=500", :target => "nzbindex"}
+              %img{:src => "/images/nzb_index.jpg"}
+            %a{:href => "http://kickass.to/usearch/#{show.name_on_disk}%20s#{s}%20720", :target => "_new"}
+              %img{:src => "/images/kick-ass.jpg", :height => '10px'}
+            %a{:href => "http://google.com/?q=torrent+#{show.name_on_disk}+s#{s}+720", :target => "_new"}
+              %img{:src => "/images/google.jpg", :height => '10px'}
+            %span.bold
+              Season 
+              = s
+              [
+              = ([season["episode"]].flatten.first || {"airdate" => "0000-00"})["airdate"][0..6]
+              ]
+              
+            |
+            - [season["episode"]].flatten.each do |episode|
+              - e = "#{episode["seasonnum"]}"
+              - airdate = Date.parse(episode['airdate'])  rescue nil
+              - if episode['binary'] and episode['watched']
+                %span.episode.click_and_refresh_show.future{:title => airdate}
+                  %a{:href => "/play/#{show.id}/#{episode['binary']}"}
+                    = e
+              - elsif episode['binary']
+                %span.episode.click_and_refresh_show.new.present.not_watched{:title => airdate}
+                  %a{:href => "/play/#{show.id}/#{episode['binary']}"}
+                    = e
+              - elsif !episode["airdate"].match(/00/) and Date.parse(episode["airdate"]) > Date.today
+                %span.episode.future{:title => airdate}
+                  = e
+              - else
+                %span.episode.missing{:title => episode["airdate"]}
+                  = e
+
+  .cover
+    %img.img.img_border{:src => show.cover, :width => "250px"}

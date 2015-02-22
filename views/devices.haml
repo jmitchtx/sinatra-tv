@@ -1,0 +1,10 @@
+.label.bold
+  Devices
+.volume
+  - tvs.each do |device|
+    - if device.current
+      = device.name
+    - else
+      %a{:href => "/device/#{device.name}"}
+        = device.name
+    %br

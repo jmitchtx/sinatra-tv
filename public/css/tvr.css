@@ -1,0 +1,186 @@
+body { 
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 10px;
+  font: 0.7em Tahoma, sans-serif; 
+
+  padding: 20; 
+  margin: 0; 
+  line-height: 1.5em;
+  background: #fff; 
+  color: #454545; 
+  overflow: hidden;
+}
+
+h1 {
+  font-size: large; 
+  font: normal 2.1em Arial, Sans-Serif; 
+  letter-spacing: -1px; 
+  padding: 2px 0 0 8px; 
+  margin: 0;
+}
+
+a{
+  color: #E0691A;
+  background: inherit;
+}
+a:hover {
+  color: #6C757A; 
+  background: inherit;
+}
+
+h1 a, h2 a {
+  text-decoration: none; 
+}
+h1 a:hover, h2 a:hover { 
+  color: #FF6600; 
+  background: inherit; 
+}
+h2 { 
+  margin: 0; 
+  padding: 0; 
+  font: bold 1.7em Arial, Sans-Serif; 
+  letter-spacing: -1px; 
+}
+h2 { 
+  font-size: 1.5em; 
+  margin-bottom: 5px; 
+  color: #000; 
+  background: inherit;
+}
+
+p { 
+  margin: 0 0 5px 0; 
+}
+
+ul { 
+  margin: 0; 
+  padding : 0; 
+  list-style : none;
+}
+
+form {
+  margin: 0;
+}
+
+
+.clear{
+  clear: both;
+}
+
+.hidden{
+  display:none;
+}
+
+.left {
+  float: left;
+  width: 65%;
+  margin: 0 0 10px 0;
+}
+    
+.right {
+  float: right;
+}
+
+.img{
+  float : left;
+  margin: 5px;
+}
+
+.img_border{
+  border: black 1px solid;
+  box-shadow: 3px 3px 1px #ccc;
+  -webkit-box-shadow: 3px 3px 1px #ccc;
+  -moz-box-shadow: 3px 3px 1px #ccc;
+}
+
+.shows{
+  height: 85%;
+  overflow: scroll;
+  border: solid 1px black;
+}
+
+.show{
+  border: solid 1px black;
+  margin-bottom: -1px;
+}
+
+.show_info{
+  float: right;
+  width: 70%;
+  margin: 5px;
+}
+
+.left_rail{
+  height: 60%;
+  overflow: scroll;
+}
+
+.cover::after {
+  display:block;
+  content:"";
+  clear:both;
+}
+
+.links{
+  text-align:justify;
+  text-justify:inter-word;
+}
+
+.link{
+  padding-left: 3px;
+}
+
+.stat{
+  min-width: 122px;
+}
+
+.off{
+  background-color: #EFEFEF;
+}
+
+.index{
+  font-size: 10px;
+  font-weight: bold;
+}
+.bold{
+  font-weight:bold;
+}
+.smaller{
+  font-size: 9px;
+}
+.watched{
+  background-color: #dfdfdf;
+}
+.future{
+  background-color: #aaa;
+}
+.episode{
+  width: 600px;
+}
+.column_left {
+  float: left;
+  margin: 0 0 10px 0;
+}
+.controls a{
+  padding: 1px;
+}
+.player a{
+  padding-right: 10px;
+}
+.delete{
+  padding-right: 7px;
+}
+.footer { 
+  clear: both;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  margin: 0;
+  border-top: 1px solid #ccc;
+  line-height: 1.8em;
+}
+
+.footer a { 
+  color: #808080; 
+  background: #fff; 
+}
+

@@ -1,0 +1,116 @@
+%html
+  %head
+    %title
+      TVR
+    %script{:src => "http://code.jquery.com/jquery-1.11.2.min.js", :type => "text/javascript"}
+    %script{:src => "/js/tvr.js", :type => "text/javascript"}
+    %link{:href => "/css/tvr.css", :media => "all", :rel => "stylesheet", :type => "text/css"}
+    
+  %body
+    .tv.controls.column_left
+      .remote
+        .partial
+          = partial :devices
+        %br
+      %hr
+      .label.bold
+        TV Controls
+      .volume.async
+        - (0..10).each do |i|
+          %a{:href => "/tv/volume/#{i}"}
+            = i
+      .player.async
+        %a{:href => "/vlc/space"}
+          [ ]
+        %a{:href => "/vlc/full_screen"}
+          F
+        %a{:href => "/vlc/volume_down"}
+          = '-'
+        %a{:href => "/vlc/volume_up"}
+          +
+        %a{:href => "/vlc/keystroke_f"}
+          f
+        %a{:href => "/vlc/keystroke_g"}
+          g
+        %a{:href => "/vlc/keystroke_s"}
+          s
+
+      .player
+        %h2
+          %a{:href => "/vlc/step_back"}
+            <<
+          %a{:href => "/vlc/play"}
+            >
+          %a{:href => "/vlc/step_forward"}
+            >>
+
+  
+      %hr
+      .refresh_episodes
+        %a{:href => "/shows/refresh"}
+          Refresh All Shows
+      %hr
+  
+      .index.left_rail
+        .label.bold
+          Filters
+        %span.filters.filter.all
+          %a{:href => '/'}
+            All
+          = "(#{Show.count})"
+          %br
+        %br
+        .filter_groups
+          - Show.filter_groups.each do |f, filters|
+            = "#{f.to_s.gsub(/_/, ' ').capitalize}:"
+            .filters
+              - filters.each do |v, scope|
+                - raise "#{f} | #{v}" if scope.nil?
+                .filter
+                  - unless (params[:f] == f and params[:v] == v)
+                    %a{:href => "/shows/#{f}/#{v}"}
+                      = v
+                  = "(#{scope.count})"
+              %br
+    
+    %h2
+      = params[:v] || "All"
+    .links.filter.by.name
+      %a{:href => "#top"}
+        Top
+        = "(#{Show.count})"
+      |
+      - shows.inject({}){|m, show| l = show.name_on_disk[0].upcase; m[l] ||= 0; m[l] += 1; m}.each do |l, ct|
+        %span.link
+          %a{:href => "##{l}"}
+            = l
+            (#{ct})
+          |
+
+    .shows
+      %span.timestamp.hidden
+        = Time.now
+      %a{:name => :top}
+      - if shows.count == 0
+        You have no shows, get some
+      - else
+        - shows.each_with_index do |show, idx|
+          = partial :show, :locals => {:show => show, :row => idx % 2 == 0 ? 'on' : 'off'}
+
+  .footer
+    %p
+      %a{:href => "https://github.com/jmitchtx/tvr"} TVR
+      |
+      %a{:href => "#"} Contact
+      |
+      %a{:href => "#"} Accessibility
+      |
+      %a{:href => "#"} Products
+      |
+      %a{:href => "#"} Disclaimer
+      |
+      %a{:href => "http://jigsaw.w3.org/css-validator/check/referer"} CSS
+      and
+      %a{:href => "http://validator.w3.org/check?uri=referer"} XHTML
+      %br/
+      &copy; Copyright 2015 James Mitchell - jmitchtx@gmail.com
