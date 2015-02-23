@@ -7,8 +7,9 @@
         x
       &nbsp;
     %span.right.click_and_refresh_show
-      %a{:href => "/refresh_rage/#{show.id}"}
-        refresh
+      Last updated: 
+      %a{:href => "/show/#{show.id}/refresh/#{row}"}
+        = show.last_updated_ago.to_pretty
       &nbsp;
     
     %span.bold
@@ -26,10 +27,6 @@
     = show.errors.full_messages if show.errors.present?
     %span.left
       = "[#{show.started} - #{show.ended}]" if show.started
-      %span.click_and_refresh_show
-        Last updated: 
-        %a{:href => "/refresh/#{show.id}/row_color/#{row}"}
-          = show.last_updated_ago || 'Missing'
       
     
     .genres.clear

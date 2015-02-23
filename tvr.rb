@@ -3,8 +3,8 @@ require 'mongoid'
 require 'haml'
 require 'pp'
 
-Dir.glob('models/**/*').each{|f| require_relative f }
-Dir.glob('lib/**/*'   ).each{|f| require_relative f }
+Dir.glob('models/**/*.rb').each{|f| require_relative f }
+Dir.glob('lib/**/*.rb'   ).each{|f| require_relative f }
 
 
 class TVR < Sinatra::Base
@@ -36,7 +36,7 @@ class TVR < Sinatra::Base
     end
   
     def tvs
-      ::TV.all
+      TV.all
     end
   
     def shows
@@ -44,7 +44,7 @@ class TVR < Sinatra::Base
     end
   
     def show
-      Show.find_by(params[:show])
+      Show.find(params[:show])
     end
   
     def row
@@ -94,7 +94,6 @@ class TVR < Sinatra::Base
     else
       vlc what
     end
-    redirect back
   end
 
   get "/shows/refresh" do
@@ -107,8 +106,8 @@ class TVR < Sinatra::Base
   end
 
   get "/show/:show/refresh/:row_color" do
-    # show.fetch_rage_summary
-    # show.refresh_episodes
+    show.fetch_rage_summary
+    show.refresh_episodes
     render_show(show)
   end
 

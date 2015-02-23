@@ -6,6 +6,9 @@ A Sinatra based webapp for watching (like a TV) and managing (like a DVR) your f
 *If you intend to use this application to manage illegally downloaded digital media ... you do so at your own risk.*
 
 
+## Screenshots
+![](docs/images/ui.jpg)
+
 ## History
 This application is an extraction of part of an exising rails application I wrote for myself in my 
 spare time to help me manage the shows I like to watch.

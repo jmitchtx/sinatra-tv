@@ -24,4 +24,10 @@ $(function() {
     $.get(href)
     event.preventDefault();
   });
+  
+  $(document).delegate('span.click_and_refresh_show a', 'click', function(event){
+    $('#' + $(this).closest('.show').attr('id')).find('.async').load($(this).attr('href'));
+    event.preventDefault();
+  });
+
 });

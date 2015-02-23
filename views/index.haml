@@ -35,7 +35,7 @@
         %a{:href => "/vlc/keystroke_s"}
           s
 
-      .player
+      .player.async
         %h2
           %a{:href => "/vlc/step_back"}
             <<
@@ -95,7 +95,8 @@
         You have no shows, get some
       - else
         - shows.each_with_index do |show, idx|
-          = partial :show, :locals => {:show => show, :row => idx % 2 == 0 ? 'on' : 'off'}
+          .async
+            = partial :show, :locals => {:show => show, :row => idx % 2 == 0 ? 'on' : 'off'}
 
   .footer
     %p
